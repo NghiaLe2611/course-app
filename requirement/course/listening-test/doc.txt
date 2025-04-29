@@ -1,0 +1,4 @@
+Screen "Listening Test" (of TOEIC)
+- Use nextjs + shadcn
+- User can select parts of test or full test (120 mins) to do, can select a time to do
+- The test is the TOEIC test in real life, have a audio, sometimes has image, can have 3 or 4 choices to choose.
