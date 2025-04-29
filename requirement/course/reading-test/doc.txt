@@ -1,0 +1,6 @@
+Screen "IELTS Reading Test"
+- Use nextjs + shadcn
+- Test have title, reading part at left (per passage have different parts), question at right, includes passage (in this case is 3, may dynamically created by admin), click next go to next passage, last passage will change next -> submit to submit test
+- Have a count down time at top right, will remain when refresh or close browser (can use local or session storage)
+- Each passage have group question, per groups include questions, example: 1-6, 7-10, group question have many variants, the answer is relevant to that's question, example: question can have image, gap filling, choose true/false/given (3 answer), choose the correct letter ABCD, write the correct letter A-H....
+- Add feature highlight to note words, when select words, can choose color of highlight and write description to save (for registered user only)

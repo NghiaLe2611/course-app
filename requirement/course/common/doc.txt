@@ -1,0 +1,22 @@
+- Already have domain and VPS server
+
+- Admin:
+Implement admin (can use react + strapi...) support dynamic create test, like a rich text editor to make highly customizable and dynamical. 
+This is the most important in this project (apply for all of test like TOEIC, IELTS...
+Role & permission management
+
+- UI Pages:
+Authenticate + authorize user
+Has ability to count user view/do aa test
+Has status of test: doing, done...
+User can have favorite test/collection, flash cards, highlight note words...
+
+- Storage
+Can use cloudflare or blackblaze, cost is the priority, demand is about 20-50gb storage, unlimited bandwidth is a plus (like cloudflare)
+
+- Video/audio
+Use some techniques like blob to play resource, prevent user download resource (may be not 100% but as good as possible)
+
+- Cache
+Cache resource effectively
+

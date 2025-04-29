@@ -1,0 +1,6 @@
+Screen "Writing Test"
+- Has directions, question and image at left, response and submit at right (has word count)
+
+Screen "Speaking Test"
+- Has access to microphone to do the test
+- Sample has question audio file of real speaking test

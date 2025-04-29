@@ -1,0 +1,148 @@
+Design database + implement features + api for english test online (toeic, ielts...)
+- Main language: Typescript
+- Frontend: Nextjs
+- Backend: Nestjs
+- DB: Mongodb or postgres, Mongo is priority
+- Admin: CRUD, role
+- User: authenticate, authorize to access features like see answer and explain of test, do more test...
+
+Pages
+- Blogs (also dynamic created by admin)
+- Test includes:
++ The test is create dynamically from admin, could use CMS like strapi, should use text editor to post dynamic html, ex:
+"raw": "[{\"type\":\"p\",\"children\":[{\"text\":\"Hôm nay chúng ta cùng học một số cụm từ để nói về việc đang ‘cảm nắng’ một ai đó nha!\"}]},{\"type\":\"p\",\"children\":[{\"text\":\"- \"},{\"text\":\"in love with someone\",\"bold\":true},{\"text\":\" (đang yêu ai): I'm in love with Simon now, can't stop thinking about him. (Bây giờ tôi đang yêu Simon, không thể ngừng nghĩ về anh ấy.)\"}]},{\"type\":\"p\",\"children\":[{\"text\":\"- \"},{\"text\":\"crazy about someone\",\"bold\":true},{\"text\":\" (phát cuồng vì ai): She's crazy about a senior she's seeing recently. (Cô ấy phát cuồng vì một tiền bối mà cô ấy gặp gần đây.)\"}]},{\"type\":\"p\",\"children\":[{\"text\":\"- \"},{\"text\":\"have a crush on someone\",\"bold\":true},{\"text\":\" (cảm nắng), thường dùng cho nữ: Everyone can see that she is having a crush on him. (Ai cũng thấy rõ là con bé đang cảm nắng anh ta.)\"}]},{\"type\":\"p\",\"children\":[{\"text\":\"- \"},{\"text\":\"pursuing someone \",\"bold\":true},{\"text\":\"(trồng cây si), thường dùng cho nam: Everyone can see that he is pursuing her. (Ai cũng thấy rõ rằng thằng cha kia đang trồng cây si con nhỏ đó.)\"}]}]"
++ Example of structure data toeic test:
+[
+    {
+        "title": "Part 1 (6 câu hỏi)", // audio + hình + 4 đáp án
+        "content": [
+            "[Part 1] Tranh tả người",
+            "[Part 1] Tranh tả cả người và vật"
+        ]
+    },
+    {
+        "title": "Part 2 (25 câu hỏi)", // audio + 3 đáp án
+        "content": [
+            "[Part 2] Câu hỏi WHAT",
+            "[Part 2] Câu hỏi WHO",
+            "[Part 2] Câu hỏi WHERE",
+            "[Part 2] Câu hỏi WHEN",
+            "[Part 2] Câu hỏi HOW",
+            "[Part 2] Câu hỏi WHY",
+            "[Part 2] Câu hỏi YES/NO",
+            "[Part 2] Câu hỏi đuôi",
+            "[Part 2] Câu hỏi lựa chọn",
+            "[Part 2] Câu yêu cầu, đề nghị",
+            "[Part 2] Câu trần thuật"
+        ]
+    },
+    {
+        "title": "Part 3 (39 câu hỏi)", // audio + 3 câu hỏi vs 4 đáp án liên uan bài nghe (có thể có hình)
+        "content": [
+            "[Part 3] Câu hỏi về chủ đề, mục đích",
+            "[Part 3] Câu hỏi về danh tính người nói",
+            "[Part 3] Câu hỏi về chi tiết cuộc hội thoại",
+            "[Part 3] Câu hỏi về hành động tương lai",
+            "[Part 3] Câu hỏi kết hợp bảng biểu",
+            "[Part 3] Câu hỏi về hàm ý câu nói",
+            "[Part 3] Chủ đề: Company - General Office Work",
+            "[Part 3] Chủ đề: Company - Personnel",
+            "[Part 3] Chủ đề: Company - Business, Marketing",
+            "[Part 3] Chủ đề: Company - Event, Project",
+            "[Part 3] Chủ đề: Shopping, Service",
+            "[Part 3] Chủ đề: Order, delivery",
+            "[Part 3] Chủ đề: Transportation",
+            "[Part 3] Câu hỏi về yêu cầu, gợi ý"
+        ]
+    },
+    {
+        "title": "Part 4 (30 câu hỏi)", // audio + 3 câu hỏi vs 4 đáp án liên uan bài nghe (có thể có hình)
+        "content": [
+            "[Part 4] Câu hỏi về chủ đề, mục đích",
+            "[Part 4] Câu hỏi về danh tính, địa điểm",
+            "[Part 4] Câu hỏi về chi tiết",
+            "[Part 4] Câu hỏi về hành động tương lai",
+            "[Part 4] Câu hỏi kết hợp bảng biểu",
+            "[Part 4] Câu hỏi về hàm ý câu nói",
+            "[Part 4] Dạng bài: Telephone message - Tin nhắn thoại",
+            "[Part 4] Dạng bài: Advertisement - Quảng cáo",
+            "[Part 4] Dạng bài: Announcement - Thông báo",
+            "[Part 4] Dạng bài: Talk - Bài phát biểu, diễn văn",
+            "[Part 4] Dạng bài: Excerpt from a meeting - Trích dẫn từ buổi họp",
+            "[Part 4] Câu hỏi yêu cầu, gợi ý"
+        ]
+    },
+    {
+        "title": "Part 5 (30 câu hỏi)", // câu hỏi là điền từ + 4 đáp án
+        "content": [
+            "[Part 5] Câu hỏi từ loại",
+            "[Part 5] Câu hỏi ngữ pháp",
+            "[Part 5] Câu hỏi từ vựng",
+            "[Part 6] Câu hỏi từ loại",
+            "[Grammar] Danh từ",
+            "[Grammar] Đại từ",
+            "[Grammar] Tính từ",
+            "[Grammar] Thì",
+            "[Grammar] Thể",
+            "[Grammar] Trạng từ",
+            "[Grammar] Động từ nguyên mẫu",
+            "[Grammar] Giới từ",
+            "[Grammar] Liên từ",
+            "[Grammar] Cấu trúc so sánh"
+        ]
+    },
+    {
+        "title": "Part 6 (16 câu hỏi)", // bài đọc điền tù vs các câu hỏi liên quan (4 đáp án)
+        "content": [
+            "[Part 6] Câu hỏi từ loại",
+            "[Part 6] Câu hỏi ngữ pháp",
+            "[Part 6] Câu hỏi từ vựng",
+            "[Part 6] Câu hỏi điền câu vào đoạn văn",
+            "[Part 6] Hình thức: Thư điện tử/ thư tay (Email/ Letter)",
+            "[Part 6] Hình thức: Quảng cáo (Advertisement)",
+            "[Part 6] Hình thức: Thông báo/ văn bản hướng dẫn (Notice/ Announcement Information)",
+            "[Part 6] Hình thức: Thông báo nội bộ (Memo)",
+            "[Grammar] Danh từ",
+            "[Grammar] Đại từ",
+            "[Grammar] Tính từ",
+            "[Grammar] Thể",
+            "[Grammar] Danh động từ",
+            "[Grammar] Giới từ",
+            "[Grammar] Liên từ",
+            "[Grammar] Câu điều kiện"
+        ]
+    },
+    {
+        "title": "Part 7 (54 câu hỏi)", // bài đọc và các câu hỏi liên quan (4 đáp án)
+        "content": [
+            "[Part 7] Câu hỏi tìm thông tin",
+            "[Part 7] Câu hỏi tìm chi tiết sai",
+            "[Part 7] Câu hỏi về chủ đề, mục đích",
+            "[Part 7] Câu hỏi suy luận",
+            "[Part 7] Câu hỏi điền câu",
+            "[Part 7] Cấu trúc: một đoạn",
+            "[Part 7] Cấu trúc: nhiều đoạn",
+            "[Part 7] Dạng bài: Email/ Letter: Thư điện tử/ Thư tay",
+            "[Part 7] Dạng bài: Article/ Review: Bài báo/ Bài đánh giá",
+            "[Part 7] Dạng bài: Advertisement - Quảng cáo",
+            "[Part 7] Dạng bài: Announcement/ Notice: Thông báo",
+            "[Part 7] Dạng bài: Text message chain - Chuỗi tin nhắn",
+            "[Part 7] Câu hỏi tìm từ đồng nghĩa",
+            "[Part 7] Câu hỏi về hàm ý câu nói",
+            "[Part 7] Dạng bài: Schedule - Lịch trình, thời gian biểu"
+        ]
+    }
+]
++ IELTS test structure:  (can have image)
+Multiple format question type grouped by question
+Choose ONE WORD ONLY from the passage for each answer (question 1-3)
+Match each statement with the correct researcher, A-G. (question 4-10)
+Fill in the gaps in the table below (question 11-15)
+....
++ Listening test have audio, question, answer and transcript
++ Speaking test be able to access microphone for user to speak
++ Have a feature download test exam (need authen)
+
+Do the test have count down time, when reload remain that time (still work when not offline)
+
+In FE when do the test, test data should load in background (like nextjs server only 1 time), just load the media when play, media url should use blobs to stream, only access in that time, when close can not access any more
